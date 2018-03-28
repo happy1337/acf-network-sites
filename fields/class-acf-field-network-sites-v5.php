@@ -116,10 +116,12 @@ class acf_field_network_sites extends acf_field {
 
 	function _get_blogs($blog_id = 0){
 		global $wpdb;
-		$query = "SELECT * FROM $wpdb->blogs WHERE archived = '0' AND deleted = '0' ORDER BY blog_id";
+		$query = "SELECT * FROM $wpdb->blogs WHERE archived = '0' AND deleted = '0'";
 		if(!empty($blog_id)){
-			$query .= ' WHERE blog_id = %d';
+			$query .= ' AND blog_id = %d';
 		}
+
+		$query .= '  ORDER BY blog_id';
 
 		$query = $wpdb->prepare( $query, $blog_id );
 
